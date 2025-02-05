@@ -1,4 +1,4 @@
-.table-container {
+/* .table-container {
     margin: 20px;
 }
 
@@ -39,4 +39,32 @@
 
 .order-table th {
     background-color: #e6e6e6;
+} */
+.table-container {
+    margin: 20px;
+    width: 80%;
+}
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.table-container th, .table-container td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+.table-container th {
+    background-color: #f2f2f2;
+}
+.table-container button {
+    margin-right: 5px;
+    padding: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+.add-user-form input {
+    margin-right: 5px;
+    padding: 5px;
 }
