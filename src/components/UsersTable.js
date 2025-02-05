@@ -41,6 +41,7 @@ const UsersTable = ({ users }) => {
                         <th>ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>PhoneNumber</th>
                         <th>Email</th>
                         <th>Orders</th>
                     </tr>
@@ -51,6 +52,7 @@ const UsersTable = ({ users }) => {
                             <td>{user.ID}</td>
                             <td>{user.FirstName}</td>
                             <td>{user.LastName}</td>
+                            <td>{user.PhoneNumber}</td>
                             <td>{user.Email}</td>
                             <td>
                                 <table className="order-table">
