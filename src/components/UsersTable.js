@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './UsersTable.css';
 
 const formatDate = (dateString) => {
@@ -7,6 +8,30 @@ const formatDate = (dateString) => {
 };
 
 const UsersTable = ({ users }) => {
+    const [translators, setTranslators] = useState({});
+
+    useEffect(() => {
+        const fetchTranslators = async () => {
+            const translatorIds = [...new Set(users.flatMap(user => user.Orders.map(order => order.TranslatorID)))];
+            const translatorsData = await Promise.all(translatorIds.map(id => {
+                if (id) {
+                    return axios.get(`http://localhost:8080/translators/${id}`).then(res => res.data);
+                } else {
+                    return null;
+                }
+            }));
+            const translatorMap = translatorsData.reduce((acc, translator) => {
+                if (translator) {
+                    acc[translator.ID] = translator;
+                }
+                return acc;
+            }, {});
+            setTranslators(translatorMap);
+        };
+
+        fetchTranslators();
+    }, [users]);
+
     return (
         <div className="table-container">
             <h3>Users</h3>
@@ -35,6 +60,7 @@ const UsersTable = ({ users }) => {
                                             <th>Status</th>
                                             <th>Type</th>
                                             <th>Created At</th>
+                                            <th>Translator</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -44,6 +70,16 @@ const UsersTable = ({ users }) => {
                                                 <td>{order.Status}</td>
                                                 <td>{order.Type}</td>
                                                 <td>{formatDate(order.CreatedAt)}</td>
+                                                <td>
+                                                    {translators[order.TranslatorID] ? (
+                                                        <div>
+                                                            <p>Name: {translators[order.TranslatorID].FirstName} {translators[order.TranslatorID].LastName}</p>
+                                                            <p>Phone Number: {translators[order.TranslatorID].PhoneNumber}</p>
+                                                        </div>
+                                                    ) : (
+                                                        <p>No Translator</p>
+                                                    )}
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
