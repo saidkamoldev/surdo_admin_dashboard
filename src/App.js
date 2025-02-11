@@ -23,18 +23,39 @@
 // }
 
 // export default App;
+// import React from 'react';
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import Login from './components/Login';
+// import Dashboard from './components/Dashboard';
+
+// function App() {
+//     return (
+//         <Router>
+//             <div>
+//                 <Routes>
+//                     <Route exact path="/" element={<Login />} />
+//                     <Route path="/dashboard" element={<Dashboard />} />
+//                 </Routes>
+//             </div>
+//         </Router>
+//     );
+// }
+
+// export default App;
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import SupportChat from './components/SupportChat'; // Yangi chat komponentini import qilish
 
 function App() {
     return (
         <Router>
             <div>
                 <Routes>
-                    <Route exact path="/" element={<Login />} />
+                    <Route path="/" element={<Login />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/support-chat" element={<SupportChat />} /> {/* Yangi yo'l */}
                 </Routes>
             </div>
         </Router>
